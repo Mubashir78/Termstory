@@ -1633,9 +1633,12 @@ class ResetConfirmScreen(ModalScreen):
 class MatrixDefragScreen(ModalScreen[None]):
     """Cyberpunk Matrix Defrag animation overlay."""
     BINDINGS = [
-        Binding("escape", "dismiss", "Close", show=True),
-        Binding("q", "dismiss", "Close", show=True),
+        Binding("escape", "close_matrix", "Close", show=True),
+        Binding("q", "close_matrix", "Close", show=True),
     ]
+
+    def action_close_matrix(self) -> None:
+        self.call_after_refresh(self.dismiss)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -1721,9 +1724,12 @@ class MatrixDefragScreen(ModalScreen[None]):
 class GhostTyperScreen(ModalScreen[None]):
     """Cyberpunk Ghost Typer playback simulator."""
     BINDINGS = [
-        Binding("escape", "dismiss", "Stop Playback", show=True),
-        Binding("q", "dismiss", "Stop Playback", show=True),
+        Binding("escape", "close_typing", "Stop Playback", show=True),
+        Binding("q", "close_typing", "Stop Playback", show=True),
     ]
+
+    def action_close_typing(self) -> None:
+        self.call_after_refresh(self.dismiss)
     
     def __init__(self, commands: List[str], *args, **kwargs):
         super().__init__(*args, **kwargs)
